@@ -152,7 +152,7 @@ function App() {
         className={cn(
           "min-h-screen min-w-[100vw]",
           "flex justify-center items-center",
-          "text-center font-quranic"
+          "text-center"
         )}
       >
         <OpeningQuiz />

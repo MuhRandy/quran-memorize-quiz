@@ -15,11 +15,12 @@ const Quiz = () => {
         Memorize Qur'an Quiz {currentQuestion + 1}/{numberOfQuestions}
       </Card.H1>
 
-      <p>{quiz[currentQuestion]?.question}</p>
+      <p className="font-quranic">{quiz[currentQuestion]?.question}</p>
 
       <div className="flex flex-col gap-2">
         {quiz[currentQuestion]?.options.map((option, index) => (
           <Button
+            className="font-quranic"
             children={option.text}
             key={index}
             buttonHandler={() => {
