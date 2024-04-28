@@ -21,7 +21,10 @@ const ChooseSurahDialog = () => {
         <div className={cn("grid grid-cols-4 gap-2")}>
           {surah.map((item) => (
             <Button
-              className="font-quranic"
+              className={cn("font-quranic text-inherit text-lg", "bg-inherit", [
+                "hover:text-teal-800",
+                "hover:border-teal-800",
+              ])}
               buttonHandler={() => {
                 changeChoosenSurah(item.englishName);
 
