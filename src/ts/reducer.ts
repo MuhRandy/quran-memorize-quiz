@@ -1,8 +1,21 @@
 import { GlobalAction, GlobalState } from "./type";
 
 const reducer = (state: GlobalState, action: GlobalAction) => {
-  const { type, newSurah, nextChoosenSurah, nextNumberOfQuestions } = action;
-  const { isShowChoosenSurah, isShowNumberOfQuestions } = state;
+  const {
+    type,
+    newSurah,
+    newQuiz,
+    nextChoosenSurah,
+    nextNumberOfQuestions,
+    nextChoosenSurahNumber,
+  } = action;
+  const {
+    isShowChoosenSurah,
+    isShowNumberOfQuestions,
+    isQuizStart,
+    currentQuestion,
+    quizScore,
+  } = state;
 
   switch (type) {
     case "changed_surah":
@@ -10,25 +23,59 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
         ...state,
         surah: newSurah,
       };
-    case "toggle_isShowChooseSurah":
+
+    case "changed_quiz":
       return {
         ...state,
-        isShowChoosenSurah: !isShowChoosenSurah,
+        quiz: newQuiz,
       };
-    case "toggle_isShowNumberOfQuestions":
-      return {
-        ...state,
-        isShowNumberOfQuestions: !isShowNumberOfQuestions,
-      };
+
     case "changed_choosenSurah":
       return {
         ...state,
         choosenSurah: nextChoosenSurah,
       };
+
+    case "changed_choosenSurahNumber":
+      return {
+        ...state,
+        choosenSurahNumber: nextChoosenSurahNumber,
+      };
+
     case "changed_numberOfQuestions":
       return {
         ...state,
         numberOfQuestions: nextNumberOfQuestions,
+      };
+
+    case "toggle_isShowChooseSurah":
+      return {
+        ...state,
+        isShowChoosenSurah: !isShowChoosenSurah,
+      };
+
+    case "toggle_isShowNumberOfQuestions":
+      return {
+        ...state,
+        isShowNumberOfQuestions: !isShowNumberOfQuestions,
+      };
+
+    case "toggle_isQuizStart":
+      return {
+        ...state,
+        isQuizStart: !isQuizStart,
+      };
+
+    case "increment_currentQuestion":
+      return {
+        ...state,
+        currentQuestion: currentQuestion + 1,
+      };
+
+    case "increment_quizScore":
+      return {
+        ...state,
+        quizScore: quizScore + 1,
       };
 
     default:

@@ -1,23 +1,22 @@
 import { createContext, useContext } from "react";
-import { State } from "./type";
+import { GlobalContextProps, GlobalState } from "./type";
 
-const initialState = {
+const initialState: GlobalState = {
   surah: [],
+  quiz: [],
   isShowChoosenSurah: false,
   isShowNumberOfQuestions: false,
+  isQuizStart: false,
   choosenSurah: "",
+  choosenSurahNumber: 0,
   numberOfQuestions: 0,
+  currentQuestion: 0,
+  quizScore: 0,
 };
 
-const MyGlobalContext = createContext<State>({
+const MyGlobalContext = createContext<GlobalContextProps>({
   state: initialState,
-  dispatch: () => {},
-  initialDispatchValue: {
-    type: "",
-    newSurah: [],
-    nextChoosenSurah: "",
-    nextNumberOfQuestions: 0,
-  },
+  globalStateAction: {},
 });
 
 const useGlobalContext = () => useContext(MyGlobalContext);

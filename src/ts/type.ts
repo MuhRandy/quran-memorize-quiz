@@ -1,11 +1,11 @@
-import { Dispatch, ReactNode } from "react";
+import { ReactNode } from "react";
 
-type defaultProps = {
+type DefaultProps = {
   children: ReactNode;
   className?: string;
 };
 
-type surahProps = {
+type SurahProps = {
   englishName: string;
   englishNameTranslation: string;
   name: string;
@@ -14,34 +14,75 @@ type surahProps = {
   revelationType: string;
 }[];
 
+type QuizProps = {
+  question: string;
+  options: {
+    text: string;
+    value: number;
+  }[];
+}[];
+
+type GlobalActionType =
+  | "changed_surah"
+  | "changed_choosenSurah"
+  | "changed_choosenSurahNumber"
+  | "changed_numberOfQuestions"
+  | "changed_quiz"
+  | "toggle_isQuizStart"
+  | "toggle_isShowChooseSurah"
+  | "toggle_isShowNumberOfQuestions"
+  | "increment_currentQuestion"
+  | "increment_quizScore"
+  | "";
+
+type GlobalStateActionProps =
+  | {
+      changeQuiz: (newQuiz: QuizProps) => void;
+      changeSurah: (newSurah: SurahProps) => void;
+      changeChoosenSurah: (nextChoosenSurah: string) => void;
+      changeChoosenSurahNumber: (nextChoosenSurahNumber: number) => void;
+      changeNumberOfQuestions: (nextNumberOfQuestions: number) => void;
+      toggleIsShowChooseSurah: () => void;
+      toggleIsShowNumberOfQuestions: () => void;
+      toggleIsQuizStart: () => void;
+      incrementCurrentQuestion: () => void;
+      incrementQuizScore: () => void;
+    }
+  | Record<string, never>;
+
 type GlobalContextProps = {
-  surah: surahProps | [];
-  isShowChoosenSurah: boolean;
-  isShowNumberOfQuestions: boolean;
-  choosenSurah: string;
-  numberOfQuestions: number;
+  state: GlobalState;
+  globalStateAction: GlobalStateActionProps;
 };
 
 type GlobalAction = {
-  type: string;
-  newSurah: surahProps;
+  type: GlobalActionType;
+  newSurah: SurahProps;
+  newQuiz: QuizProps;
   nextChoosenSurah: string;
+  nextChoosenSurahNumber: number;
   nextNumberOfQuestions: number;
 };
 
-type GlobalState = GlobalContextProps;
-
-type State = {
-  state: GlobalContextProps;
-  dispatch: Dispatch<GlobalAction>;
-  initialDispatchValue: GlobalAction;
+type GlobalState = {
+  surah: SurahProps | [];
+  isShowChoosenSurah: boolean;
+  isShowNumberOfQuestions: boolean;
+  choosenSurah: string;
+  choosenSurahNumber: number;
+  numberOfQuestions: number;
+  quiz: QuizProps | [];
+  isQuizStart: boolean;
+  currentQuestion: number;
+  quizScore: number;
 };
 
 export type {
-  defaultProps,
+  DefaultProps,
   GlobalContextProps,
-  surahProps,
+  SurahProps,
+  QuizProps,
   GlobalAction,
+  GlobalStateActionProps,
   GlobalState,
-  State,
 };

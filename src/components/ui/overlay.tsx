@@ -1,7 +1,7 @@
-import { defaultProps } from "../../ts/type";
+import { DefaultProps } from "../../ts/type";
 import { cn } from "../../ts/util";
 
-type OverlayProps = defaultProps & {
+type OverlayProps = DefaultProps & {
   isShow: boolean;
 };
 

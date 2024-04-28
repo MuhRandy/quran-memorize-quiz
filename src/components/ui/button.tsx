@@ -1,7 +1,7 @@
-import { defaultProps } from "../../ts/type";
+import { DefaultProps } from "../../ts/type";
 import { cn } from "../../ts/util";
 
-type ButtonProps = defaultProps & { buttonHandler: VoidFunction };
+type ButtonProps = DefaultProps & { buttonHandler: VoidFunction };
 
 const Button = ({ className, children, buttonHandler }: ButtonProps) => {
   return (

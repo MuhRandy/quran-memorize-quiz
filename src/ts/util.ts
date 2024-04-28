@@ -1,12 +1,11 @@
 import { twMerge } from "tailwind-merge";
 import { clsx, ClassValue } from "clsx";
-import { surahProps } from "./type";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-async function getSurah(getDataHandler: (data: surahProps) => void) {
+async function getDataApi(getDataHandler: (data: []) => void, url: string) {
   try {
-    const response = await fetch("http://api.alquran.cloud/v1/surah");
+    const response = await fetch(url);
     try {
       const { data } = await response.json();
 
@@ -19,4 +18,4 @@ async function getSurah(getDataHandler: (data: surahProps) => void) {
   }
 }
 
-export { cn, getSurah };
+export { cn, getDataApi };

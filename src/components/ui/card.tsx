@@ -1,9 +1,9 @@
 import { cn } from "../../ts/util";
-import { defaultProps } from "../../ts/type";
+import { DefaultProps } from "../../ts/type";
 
-type CardProps = defaultProps;
-type H1Props = defaultProps;
-type H2Props = defaultProps;
+type CardProps = DefaultProps;
+type H1Props = DefaultProps;
+type H2Props = DefaultProps;
 
 const Card = ({ children, className }: CardProps) => {
   return (

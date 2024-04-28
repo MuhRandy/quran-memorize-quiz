@@ -5,8 +5,10 @@ import Card from "./ui/card";
 import Overlay from "./ui/overlay";
 
 const NumberOfQuestionsDialog = () => {
-  const { state, dispatch, initialDispatchValue } = useGlobalContext();
+  const { state, globalStateAction } = useGlobalContext();
   const { isShowNumberOfQuestions, numberOfQuestions } = state;
+  const { changeNumberOfQuestions, toggleIsShowNumberOfQuestions } =
+    globalStateAction;
 
   return (
     <Overlay isShow={isShowNumberOfQuestions} className={cn("min-h-full")}>
@@ -30,22 +32,15 @@ const NumberOfQuestionsDialog = () => {
               value = "100";
             }
 
-            dispatch({
-              ...initialDispatchValue,
-              type: "changed_numberOfQuestions",
-              nextNumberOfQuestions: isNaN(parseInt(value))
-                ? 0
-                : parseInt(value),
-            });
+            changeNumberOfQuestions(
+              isNaN(parseInt(value)) ? 0 : parseInt(value)
+            );
           }}
         />
 
         <Button
           buttonHandler={() => {
-            dispatch({
-              ...initialDispatchValue,
-              type: "toggle_isShowNumberOfQuestions",
-            });
+            toggleIsShowNumberOfQuestions();
           }}
         >
           Submit

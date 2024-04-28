@@ -5,8 +5,13 @@ import Overlay from "./ui/overlay";
 import { useGlobalContext } from "../ts/context";
 
 const ChooseSurahDialog = () => {
-  const { state, dispatch, initialDispatchValue } = useGlobalContext();
+  const { state, globalStateAction } = useGlobalContext();
   const { surah, isShowChoosenSurah } = state;
+  const {
+    changeChoosenSurah,
+    changeChoosenSurahNumber,
+    toggleIsShowChooseSurah,
+  } = globalStateAction;
 
   return (
     <Overlay isShow={isShowChoosenSurah}>
@@ -17,15 +22,11 @@ const ChooseSurahDialog = () => {
           {surah.map((item) => (
             <Button
               buttonHandler={() => {
-                dispatch({
-                  ...initialDispatchValue,
-                  type: "changed_choosenSurah",
-                  nextChoosenSurah: item.englishName,
-                });
-                dispatch({
-                  ...initialDispatchValue,
-                  type: "toggle_isShowChooseSurah",
-                });
+                changeChoosenSurah(item.englishName);
+
+                changeChoosenSurahNumber(item.number);
+
+                toggleIsShowChooseSurah();
               }}
               key={item.number}
             >

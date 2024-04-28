@@ -6,10 +6,15 @@ import { useGlobalContext } from "../ts/context";
 import { cn } from "../ts/util";
 
 const OpeningQuiz = () => {
-  const { state, dispatch, initialDispatchValue } = useGlobalContext();
-  const { choosenSurah, numberOfQuestions } = state;
+  const { state, globalStateAction } = useGlobalContext();
+  const { choosenSurah, numberOfQuestions, isQuizStart, quiz } = state;
+  const {
+    toggleIsShowChooseSurah,
+    toggleIsShowNumberOfQuestions,
+    toggleIsQuizStart,
+  } = globalStateAction;
   return (
-    <Card>
+    <Card className={cn({ hidden: isQuizStart })}>
       <Card.H1>Al-Qur'an Memorize Quiz</Card.H1>
 
       <div>
@@ -23,25 +28,27 @@ const OpeningQuiz = () => {
         <p>Number of quiz: {numberOfQuestions}</p>
       </div>
 
-      <div className={cn("flex gap-2 justify-center")}>
-        <Button
-          buttonHandler={() =>
-            dispatch({
-              ...initialDispatchValue,
-              type: "toggle_isShowChooseSurah",
-            })
-          }
-          children="Choose Surah"
-        />
+      <div className="flex flex-col gap-2">
+        <div className={cn("flex gap-2 justify-center")}>
+          <Button
+            className="flex-1"
+            buttonHandler={() => toggleIsShowChooseSurah()}
+            children="Choose Surah"
+          />
+
+          <Button
+            className="flex-1"
+            buttonHandler={() => toggleIsShowNumberOfQuestions()}
+            children="Choose Quiz Quantity"
+          />
+        </div>
 
         <Button
-          buttonHandler={() =>
-            dispatch({
-              ...initialDispatchValue,
-              type: "toggle_isShowNumberOfQuestions",
-            })
-          }
-          children="Choose Quiz Quantity"
+          children="Start Quiz"
+          className={cn({ hidden: quiz.length === 0 })}
+          buttonHandler={() => {
+            toggleIsQuizStart();
+          }}
         />
       </div>
 
