@@ -24,7 +24,7 @@ const NumberOfQuestionsDialog = () => {
           min={0}
           type="number"
           placeholder="0"
-          value={numberOfQuestions}
+          value={numberOfQuestions.toString()}
           onChange={(event) => {
             let { value } = event.target;
 
