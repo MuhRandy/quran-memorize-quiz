@@ -7,6 +7,7 @@ const initialState: GlobalState = {
   isShowChoosenSurah: false,
   isShowNumberOfQuestions: false,
   isQuizStart: false,
+  isQuizEnd: false,
   choosenSurah: "",
   choosenSurahNumber: 0,
   numberOfQuestions: 0,

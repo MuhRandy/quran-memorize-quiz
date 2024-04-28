@@ -6,7 +6,8 @@ import Card from "./ui/card";
 const Quiz = () => {
   const { state, globalStateAction } = useGlobalContext();
   const { isQuizStart, quiz, currentQuestion, numberOfQuestions } = state;
-  const { incrementCurrentQuestion, incrementQuizScore } = globalStateAction;
+  const { incrementCurrentQuestion, incrementQuizScore, toggleIsQuizEnd } =
+    globalStateAction;
 
   return (
     <Card className={cn({ hidden: !isQuizStart })}>
@@ -28,6 +29,8 @@ const Quiz = () => {
                 if (option.value) {
                   incrementQuizScore();
                 }
+              } else {
+                toggleIsQuizEnd();
               }
             }}
           />

@@ -13,6 +13,7 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
     isShowChoosenSurah,
     isShowNumberOfQuestions,
     isQuizStart,
+    isQuizEnd,
     currentQuestion,
     quizScore,
   } = state;
@@ -66,6 +67,12 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
         isQuizStart: !isQuizStart,
       };
 
+    case "toggle_isQuizEnd":
+      return {
+        ...state,
+        isQuizEnd: !isQuizEnd,
+      };
+
     case "increment_currentQuestion":
       return {
         ...state,
@@ -76,6 +83,17 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
       return {
         ...state,
         quizScore: quizScore + 1,
+      };
+
+    case "reset_quiz":
+      return {
+        ...state,
+        quiz: [],
+        choosenSurah: "",
+        choosenSurahNumber: 0,
+        numberOfQuestions: 0,
+        currentQuestion: 0,
+        quizScore: 0,
       };
 
     default:

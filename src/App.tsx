@@ -2,7 +2,6 @@ import { useEffect, useReducer } from "react";
 import { cn, getDataApi } from "./ts/util";
 import { MyGlobalContext, initialState } from "./ts/context";
 import { reducer } from "./ts/reducer";
-import OpeningQuiz from "./components/opening-quiz";
 import Quiz from "./components/quiz";
 import {
   GlobalAction,
@@ -10,6 +9,8 @@ import {
   QuizProps,
   SurahProps,
 } from "./ts/type";
+import FinishingQuiz from "./components/finishing-quiz";
+import OpeningQuiz from "./components/opening-quiz";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -86,6 +87,13 @@ function App() {
     });
   };
 
+  const toggleIsQuizEnd = () => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "toggle_isQuizEnd",
+    });
+  };
+
   const incrementCurrentQuestion = () => {
     dispatch({
       ...initialDispatchValue,
@@ -100,6 +108,13 @@ function App() {
     });
   };
 
+  const resetQuiz = () => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "reset_quiz",
+    });
+  };
+
   const globalStateAction: GlobalStateActionProps = {
     changeQuiz,
     changeSurah,
@@ -109,8 +124,10 @@ function App() {
     toggleIsShowChooseSurah,
     toggleIsShowNumberOfQuestions,
     toggleIsQuizStart,
+    toggleIsQuizEnd,
     incrementCurrentQuestion,
     incrementQuizScore,
+    resetQuiz,
   };
 
   useEffect(() => {
@@ -135,12 +152,14 @@ function App() {
         className={cn(
           "min-h-screen min-w-[100vw]",
           "flex justify-center items-center",
-          "text-center"
+          "text-center font-quranic"
         )}
       >
         <OpeningQuiz />
 
         {quiz.length > 0 ? <Quiz /> : ""}
+
+        <FinishingQuiz />
       </main>
     </MyGlobalContext.Provider>
   );

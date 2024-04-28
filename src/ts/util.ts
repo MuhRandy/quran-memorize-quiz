@@ -18,4 +18,10 @@ async function getDataApi(getDataHandler: (data: []) => void, url: string) {
   }
 }
 
-export { cn, getDataApi };
+const countScoreResult = (quizScore: number, numberOfQuestions: number) => {
+  const result = (quizScore / numberOfQuestions) * 100;
+
+  return result;
+};
+
+export { cn, getDataApi, countScoreResult };

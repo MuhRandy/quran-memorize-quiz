@@ -29,10 +29,12 @@ type GlobalActionType =
   | "changed_numberOfQuestions"
   | "changed_quiz"
   | "toggle_isQuizStart"
+  | "toggle_isQuizEnd"
   | "toggle_isShowChooseSurah"
   | "toggle_isShowNumberOfQuestions"
   | "increment_currentQuestion"
   | "increment_quizScore"
+  | "reset_quiz"
   | "";
 
 type GlobalStateActionProps =
@@ -45,8 +47,10 @@ type GlobalStateActionProps =
       toggleIsShowChooseSurah: () => void;
       toggleIsShowNumberOfQuestions: () => void;
       toggleIsQuizStart: () => void;
+      toggleIsQuizEnd: () => void;
       incrementCurrentQuestion: () => void;
       incrementQuizScore: () => void;
+      resetQuiz: () => void;
     }
   | Record<string, never>;
 
@@ -66,13 +70,14 @@ type GlobalAction = {
 
 type GlobalState = {
   surah: SurahProps | [];
+  quiz: QuizProps | [];
   isShowChoosenSurah: boolean;
   isShowNumberOfQuestions: boolean;
+  isQuizStart: boolean;
+  isQuizEnd: boolean;
   choosenSurah: string;
   choosenSurahNumber: number;
   numberOfQuestions: number;
-  quiz: QuizProps | [];
-  isQuizStart: boolean;
   currentQuestion: number;
   quizScore: number;
 };
