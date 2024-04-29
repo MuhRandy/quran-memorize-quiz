@@ -79,7 +79,7 @@ const Quiz = () => {
 
       <Button
         className={cn({
-          hidden: !isOptionsClicked,
+          hidden: !isOptionClicked,
         })}
         buttonHandler={() => {
           if (currentQuestion + 1 < numberOfQuestions) {
