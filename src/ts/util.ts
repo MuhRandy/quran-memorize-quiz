@@ -21,7 +21,7 @@ async function getDataApi(getDataHandler: (data: []) => void, url: string) {
 const countScoreResult = (quizScore: number, numberOfQuestions: number) => {
   const result = (quizScore / numberOfQuestions) * 100;
 
-  return result;
+  return Math.round(result);
 };
 
 export { cn, getDataApi, countScoreResult };
