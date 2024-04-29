@@ -18,6 +18,11 @@ const FinishingQuiz = () => {
           Your Score is {countScoreResult(quizScore, numberOfQuestions)}/100
         </p>
 
+        <p>
+          Your Total Correct Answer is {quizScore} from {numberOfQuestions}{" "}
+          Questions
+        </p>
+
         <Button
           buttonHandler={() => {
             toggleIsQuizEnd();

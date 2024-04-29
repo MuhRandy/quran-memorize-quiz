@@ -83,6 +83,14 @@ function App() {
     });
   };
 
+  const changeIsCorrect = (nextIsCorrect: boolean) => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "changed_isCorrect",
+      nextIsCorrect,
+    });
+  };
+
   const toggleIsShowChooseSurah = () => {
     dispatch({
       ...initialDispatchValue,
@@ -108,14 +116,6 @@ function App() {
     dispatch({
       ...initialDispatchValue,
       type: "toggle_isQuizEnd",
-    });
-  };
-
-  const changeIsCorrect = (nextIsCorrect: boolean) => {
-    dispatch({
-      ...initialDispatchValue,
-      type: "changed_isCorrect",
-      nextIsCorrect,
     });
   };
 
