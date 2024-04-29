@@ -8,12 +8,16 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
     nextChoosenSurah,
     nextNumberOfQuestions,
     nextChoosenSurahNumber,
+    nextIsOptionsClicked,
+    nextIsCorrect,
   } = action;
   const {
     isShowChoosenSurah,
     isShowNumberOfQuestions,
     isQuizStart,
     isQuizEnd,
+    isDisabled,
+    isOptionClicked,
     currentQuestion,
     quizScore,
   } = state;
@@ -49,6 +53,18 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
         numberOfQuestions: nextNumberOfQuestions,
       };
 
+    case "changed_isOptionsClicked":
+      return {
+        ...state,
+        isOptionsClicked: nextIsOptionsClicked,
+      };
+
+    case "changed_isCorrect":
+      return {
+        ...state,
+        isCorrect: nextIsCorrect,
+      };
+
     case "toggle_isShowChooseSurah":
       return {
         ...state,
@@ -71,6 +87,18 @@ const reducer = (state: GlobalState, action: GlobalAction) => {
       return {
         ...state,
         isQuizEnd: !isQuizEnd,
+      };
+
+    case "toggle_isDisabled":
+      return {
+        ...state,
+        isDisabled: !isDisabled,
+      };
+
+    case "toggle_isOptionClicked":
+      return {
+        ...state,
+        isOptionClicked: !isOptionClicked,
       };
 
     case "increment_currentQuestion":

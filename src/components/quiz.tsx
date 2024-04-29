@@ -5,9 +5,26 @@ import Card from "./ui/card";
 
 const Quiz = () => {
   const { state, globalStateAction } = useGlobalContext();
-  const { isQuizStart, quiz, currentQuestion, numberOfQuestions } = state;
-  const { incrementCurrentQuestion, incrementQuizScore, toggleIsQuizEnd } =
-    globalStateAction;
+  const {
+    isQuizStart,
+    isOptionsClicked,
+    isOptionClicked,
+    isDisabled,
+    isCorrect,
+    quiz,
+    currentQuestion,
+    numberOfQuestions,
+  } = state;
+  const {
+    incrementCurrentQuestion,
+    incrementQuizScore,
+    toggleIsQuizEnd,
+    toggleIsDisabled,
+    toggleIsOptionClicked,
+    changeIsCorrect,
+    changeIsOptionsClicked,
+    resetIsOptionsClicked,
+  } = globalStateAction;
 
   return (
     <Card className={cn({ hidden: !isQuizStart })}>
@@ -15,31 +32,70 @@ const Quiz = () => {
         Memorize Qur'an Quiz {currentQuestion + 1}/{numberOfQuestions}
       </Card.H1>
 
+      <p>Guess the next verse of ayah below</p>
+
       <p className="font-quranic text-xl">{quiz[currentQuestion]?.question}</p>
+
+      <p
+        className={cn("px-2 rounded-md", {
+          "bg-red-400": !isCorrect && isOptionClicked,
+          "bg-green-400": isCorrect && isOptionClicked,
+          hidden: !isOptionClicked,
+        })}
+      >
+        {isCorrect ? "Correct" : "Incorrect"}
+      </p>
 
       <div className="flex flex-col gap-2">
         {quiz[currentQuestion]?.options.map((option, index) => (
           <Button
-            className={cn("font-quranic text-inherit text-lg", "bg-inherit", [
-              "hover:text-teal-800",
-              "hover:border-teal-800",
-            ])}
-            children={option.text}
             key={index}
+            children={option.text}
+            isDisabled={isDisabled}
+            className={cn("font-quranic text-inherit text-lg", "bg-inherit", {
+              "cursor-not-allowed": isDisabled,
+              "bg-green-400 hover:bg-green-400":
+                option.value && isOptionClicked,
+              "bg-red-400 hover:bg-red-400":
+                !option.value && isOptionsClicked[index],
+              ["hover:border-teal-800 hover:text-teal-800"]: !isDisabled,
+            })}
             buttonHandler={() => {
-              if (currentQuestion + 1 < numberOfQuestions) {
-                incrementCurrentQuestion();
-
-                if (option.value) {
-                  incrementQuizScore();
-                }
-              } else {
-                toggleIsQuizEnd();
+              if (option.value) {
+                incrementQuizScore();
+                changeIsCorrect(true);
               }
+
+              const newArr = isOptionsClicked;
+              newArr[index] = true;
+
+              changeIsOptionsClicked(newArr);
+              toggleIsDisabled();
+              toggleIsOptionClicked();
             }}
           />
         ))}
       </div>
+
+      <Button
+        className={cn({
+          hidden: !isOptionsClicked,
+        })}
+        buttonHandler={() => {
+          if (currentQuestion + 1 < numberOfQuestions) {
+            incrementCurrentQuestion();
+          } else {
+            toggleIsQuizEnd();
+          }
+
+          resetIsOptionsClicked();
+          toggleIsDisabled();
+          toggleIsOptionClicked();
+          changeIsCorrect(false);
+        }}
+      >
+        Next Questions
+      </Button>
     </Card>
   );
 };

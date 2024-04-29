@@ -28,10 +28,14 @@ type GlobalActionType =
   | "changed_choosenSurahNumber"
   | "changed_numberOfQuestions"
   | "changed_quiz"
+  | "changed_isCorrect"
+  | "changed_isOptionsClicked"
   | "toggle_isQuizStart"
   | "toggle_isQuizEnd"
   | "toggle_isShowChooseSurah"
   | "toggle_isShowNumberOfQuestions"
+  | "toggle_isDisabled"
+  | "toggle_isOptionClicked"
   | "increment_currentQuestion"
   | "increment_quizScore"
   | "reset_quiz"
@@ -44,13 +48,18 @@ type GlobalStateActionProps =
       changeChoosenSurah: (nextChoosenSurah: string) => void;
       changeChoosenSurahNumber: (nextChoosenSurahNumber: number) => void;
       changeNumberOfQuestions: (nextNumberOfQuestions: number) => void;
+      changeIsOptionsClicked: (isOptionsClicked: boolean[]) => void;
+      changeIsCorrect: (isCorrect: boolean) => void;
       toggleIsShowChooseSurah: () => void;
       toggleIsShowNumberOfQuestions: () => void;
       toggleIsQuizStart: () => void;
       toggleIsQuizEnd: () => void;
+      toggleIsDisabled: () => void;
+      toggleIsOptionClicked: () => void;
       incrementCurrentQuestion: () => void;
       incrementQuizScore: () => void;
       resetQuiz: () => void;
+      resetIsOptionsClicked: () => void;
     }
   | Record<string, never>;
 
@@ -66,6 +75,8 @@ type GlobalAction = {
   nextChoosenSurah: string;
   nextChoosenSurahNumber: number;
   nextNumberOfQuestions: number;
+  nextIsOptionsClicked: boolean[];
+  nextIsCorrect: boolean;
 };
 
 type GlobalState = {
@@ -75,6 +86,10 @@ type GlobalState = {
   isShowNumberOfQuestions: boolean;
   isQuizStart: boolean;
   isQuizEnd: boolean;
+  isCorrect: boolean;
+  isDisabled: boolean;
+  isOptionsClicked: boolean[];
+  isOptionClicked: boolean;
   choosenSurah: string;
   choosenSurahNumber: number;
   numberOfQuestions: number;

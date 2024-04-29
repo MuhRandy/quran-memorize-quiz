@@ -15,8 +15,15 @@ import OpeningQuiz from "./components/opening-quiz";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { surah, quiz, choosenSurah, choosenSurahNumber, numberOfQuestions } =
-    state;
+  const {
+    surah,
+    quiz,
+    choosenSurah,
+    choosenSurahNumber,
+    numberOfQuestions,
+    isOptionsClicked,
+    isCorrect,
+  } = state;
   const initialDispatchValue: GlobalAction = {
     type: "",
     newSurah: surah,
@@ -24,6 +31,8 @@ function App() {
     nextChoosenSurah: choosenSurah,
     nextChoosenSurahNumber: choosenSurahNumber,
     nextNumberOfQuestions: numberOfQuestions,
+    nextIsOptionsClicked: isOptionsClicked,
+    nextIsCorrect: isCorrect,
   };
 
   const changeSurah = (newSurah: SurahProps) => {
@@ -66,6 +75,14 @@ function App() {
     });
   };
 
+  const changeIsOptionsClicked = (nextIsOptionsClicked: boolean[]) => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "changed_isOptionsClicked",
+      nextIsOptionsClicked,
+    });
+  };
+
   const toggleIsShowChooseSurah = () => {
     dispatch({
       ...initialDispatchValue,
@@ -94,6 +111,28 @@ function App() {
     });
   };
 
+  const changeIsCorrect = (nextIsCorrect: boolean) => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "changed_isCorrect",
+      nextIsCorrect,
+    });
+  };
+
+  const toggleIsDisabled = () => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "toggle_isDisabled",
+    });
+  };
+
+  const toggleIsOptionClicked = () => {
+    dispatch({
+      ...initialDispatchValue,
+      type: "toggle_isOptionClicked",
+    });
+  };
+
   const incrementCurrentQuestion = () => {
     dispatch({
       ...initialDispatchValue,
@@ -115,19 +154,34 @@ function App() {
     });
   };
 
+  const resetIsOptionsClicked = () => {
+    const newArr = [false, false, false, false];
+
+    dispatch({
+      ...initialDispatchValue,
+      type: "changed_isOptionsClicked",
+      nextIsOptionsClicked: newArr,
+    });
+  };
+
   const globalStateAction: GlobalStateActionProps = {
     changeQuiz,
     changeSurah,
     changeChoosenSurah,
     changeChoosenSurahNumber,
     changeNumberOfQuestions,
+    changeIsOptionsClicked,
+    changeIsCorrect,
     toggleIsShowChooseSurah,
     toggleIsShowNumberOfQuestions,
     toggleIsQuizStart,
     toggleIsQuizEnd,
+    toggleIsDisabled,
+    toggleIsOptionClicked,
     incrementCurrentQuestion,
     incrementQuizScore,
     resetQuiz,
+    resetIsOptionsClicked,
   };
 
   useEffect(() => {
