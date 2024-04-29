@@ -14,7 +14,7 @@ const OpeningQuiz = () => {
     toggleIsQuizStart,
   } = globalStateAction;
   return (
-    <Card className={cn({ hidden: isQuizStart })}>
+    <Card className={cn("mx-4", { hidden: isQuizStart })}>
       <Card.H1>Al-Qur'an Memorize Quiz</Card.H1>
 
       <div>

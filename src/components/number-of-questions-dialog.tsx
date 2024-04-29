@@ -12,7 +12,7 @@ const NumberOfQuestionsDialog = () => {
 
   return (
     <Overlay isShow={isShowNumberOfQuestions} className={cn("min-h-full")}>
-      <Card className={cn("bg-white")}>
+      <Card className={cn("bg-white mx-4")}>
         <Card.H2>How much number of questions?</Card.H2>
 
         <input

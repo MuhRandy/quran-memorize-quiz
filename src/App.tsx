@@ -198,8 +198,6 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choosenSurahNumber, numberOfQuestions]);
 
-  console.log(quiz);
-
   return (
     <MyGlobalContext.Provider value={{ state, globalStateAction }}>
       <main

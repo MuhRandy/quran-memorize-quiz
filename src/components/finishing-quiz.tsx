@@ -11,7 +11,7 @@ const FinishingQuiz = () => {
 
   return (
     <Overlay isShow={isQuizEnd}>
-      <Card className="bg-white">
+      <Card className="bg-white mx-4">
         <Card.H1>Congratulations</Card.H1>
 
         <p>

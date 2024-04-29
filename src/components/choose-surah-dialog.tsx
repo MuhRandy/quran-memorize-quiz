@@ -18,7 +18,9 @@ const ChooseSurahDialog = () => {
       <Card className={cn("bg-white max-w-[1000px]")}>
         <Card.H2>Choose Surah to Memorize</Card.H2>
 
-        <div className={cn("grid grid-cols-4 gap-2")}>
+        <div
+          className={cn("grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2")}
+        >
           {surah.map((item) => (
             <Button
               className={cn("font-quranic text-inherit text-lg", "bg-inherit", [
