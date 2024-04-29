@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from "react";
-import { cn, getDataApi } from "./ts/util";
+import { cn, getDataApi, getQuiz } from "./ts/util";
 import { MyGlobalContext, initialState } from "./ts/context";
 import { reducer } from "./ts/reducer";
 import Quiz from "./components/quiz";
@@ -193,12 +193,12 @@ function App() {
 
   useEffect(() => {
     if (choosenSurahNumber !== 0 && numberOfQuestions !== 0) {
-      getDataApi((data) => {
-        changeQuiz(data);
-      }, `https://quran.zakiego.com/api/guessVerse?by=surah&select=${choosenSurahNumber}&amount=${numberOfQuestions}`);
+      getQuiz(numberOfQuestions, [choosenSurahNumber], changeQuiz);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [choosenSurahNumber, numberOfQuestions]);
+
+  console.log(quiz);
 
   return (
     <MyGlobalContext.Provider value={{ state, globalStateAction }}>

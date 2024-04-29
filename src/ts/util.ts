@@ -1,5 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { clsx, ClassValue } from "clsx";
+import { guessVerse } from "quran-quiz";
+import { QuizProps } from "./type";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -24,4 +26,16 @@ const countScoreResult = (quizScore: number, numberOfQuestions: number) => {
   return Math.round(result);
 };
 
-export { cn, getDataApi, countScoreResult };
+async function getQuiz(
+  amount: number,
+  select: number[],
+  getDataHandler: (data: QuizProps) => void
+) {
+  const quiz = await guessVerse.bySurah({
+    amount,
+    select,
+  });
+  getDataHandler(quiz.data);
+}
+
+export { cn, getDataApi, countScoreResult, getQuiz };

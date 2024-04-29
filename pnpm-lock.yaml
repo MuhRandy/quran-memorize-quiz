@@ -8,6 +8,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  quran-quiz:
+    specifier: ^0.1.4
+    version: 0.1.4
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -2197,6 +2200,10 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /quran-quiz@0.1.4:
+    resolution: {integrity: sha512-cLgExp3sONF+sH5HWOyBLB2M1o5P0oYgP95tdJg7gG65LyQ/ZNhOWN7xuH3x/RbKcI4uyZoV1SgIhqxfeO1h5A==}
+    dev: false
 
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
