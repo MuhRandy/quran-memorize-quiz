@@ -200,19 +200,41 @@ function App() {
 
   return (
     <MyGlobalContext.Provider value={{ state, globalStateAction }}>
-      <main
-        className={cn(
-          "min-h-screen min-w-[100vw]",
-          "flex justify-center items-center",
-          "text-center"
-        )}
-      >
-        <OpeningQuiz />
+      <div className="flex flex-col justify-center min-h-screen min-w-[100vw]">
+        <main
+          className={cn(
+            "mt-auto",
+            "flex justify-center items-center",
+            "text-center"
+          )}
+        >
+          <OpeningQuiz />
 
-        {quiz.length > 0 ? <Quiz /> : ""}
+          {quiz.length > 0 ? <Quiz /> : ""}
 
-        <FinishingQuiz />
-      </main>
+          <FinishingQuiz />
+        </main>
+
+        <footer className="text-center text-xs mt-auto">
+          <p>Made with ❤ using Vite+React by Muhammad Randy</p>
+          <p>
+            Quiz Api from{" "}
+            <a
+              href="https://quran.zakiego.com/"
+              className="underline cursor-pointer"
+            >
+              quran.zakiego.com
+            </a>{" "}
+            and{" "}
+            <a
+              href="http://api.alquran.cloud"
+              className="underline cursor-pointer"
+            >
+              api.alquran.cloud
+            </a>
+          </p>
+        </footer>
+      </div>
     </MyGlobalContext.Provider>
   );
 }
