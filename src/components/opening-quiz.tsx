@@ -2,17 +2,22 @@ import ChooseSurahDialog from "./choose-surah-dialog";
 import NumberOfQuestionsDialog from "./number-of-questions-dialog";
 import Button from "./ui/button";
 import Card from "./ui/card";
-import { useGlobalContext } from "../ts/context";
 import { cn } from "../ts/util";
+import {
+  useQuizStatusActionContext,
+  useQuizStatusContext,
+} from "../services/state/QuizStatusContext";
+import { useQuizContext } from "../services/state/QuizContext";
 
 const OpeningQuiz = () => {
-  const { state, globalStateAction } = useGlobalContext();
-  const { choosenSurah, numberOfQuestions, isQuizStart, quiz } = state;
+  const { choosenSurah, numberOfQuestions, quiz } = useQuizContext();
+  const { isQuizStart } = useQuizStatusContext();
+
   const {
     toggleIsShowChooseSurah,
     toggleIsShowNumberOfQuestions,
     toggleIsQuizStart,
-  } = globalStateAction;
+  } = useQuizStatusActionContext();
   return (
     <Card className={cn("mx-4", { hidden: isQuizStart })}>
       <Card.H1>Al-Qur'an Memorize Quiz</Card.H1>

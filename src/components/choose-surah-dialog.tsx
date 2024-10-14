@@ -1,17 +1,23 @@
+import {
+  useQuizActionContext,
+  useQuizContext,
+} from "../services/state/QuizContext";
+import {
+  useQuizStatusActionContext,
+  useQuizStatusContext,
+} from "../services/state/QuizStatusContext";
 import { cn } from "../ts/util";
 import Button from "./ui/button";
 import Card from "./ui/card";
 import Overlay from "./ui/overlay";
-import { useGlobalContext } from "../ts/context";
 
 const ChooseSurahDialog = () => {
-  const { state, globalStateAction } = useGlobalContext();
-  const { surah, isShowChoosenSurah } = state;
-  const {
-    changeChoosenSurah,
-    changeChoosenSurahNumber,
-    toggleIsShowChooseSurah,
-  } = globalStateAction;
+  const { surah } = useQuizContext();
+  const { isShowChoosenSurah } = useQuizStatusContext();
+
+  const { changeChoosenSurah, changeChoosenSurahNumber } =
+    useQuizActionContext();
+  const { toggleIsShowChooseSurah } = useQuizStatusActionContext();
 
   return (
     <Overlay isShow={isShowChoosenSurah}>

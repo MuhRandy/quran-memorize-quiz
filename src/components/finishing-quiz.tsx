@@ -1,13 +1,22 @@
-import { useGlobalContext } from "../ts/context";
+import {
+  useQuizActionContext,
+  useQuizContext,
+} from "../services/state/QuizContext";
+import {
+  useQuizStatusActionContext,
+  useQuizStatusContext,
+} from "../services/state/QuizStatusContext";
 import { countScoreResult } from "../ts/util";
 import Button from "./ui/button";
 import Card from "./ui/card";
 import Overlay from "./ui/overlay";
 
 const FinishingQuiz = () => {
-  const { state, globalStateAction } = useGlobalContext();
-  const { isQuizEnd, quizScore, numberOfQuestions } = state;
-  const { toggleIsQuizEnd, toggleIsQuizStart, resetQuiz } = globalStateAction;
+  const { quizScore, numberOfQuestions } = useQuizContext();
+  const { isQuizEnd } = useQuizStatusContext();
+
+  const { resetQuiz } = useQuizActionContext();
+  const { toggleIsQuizEnd, toggleIsQuizStart } = useQuizStatusActionContext();
 
   return (
     <Overlay isShow={isQuizEnd}>

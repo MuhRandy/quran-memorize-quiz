@@ -1,30 +1,36 @@
-import { useGlobalContext } from "../ts/context";
+import {
+  useQuizActionContext,
+  useQuizContext,
+} from "../services/state/QuizContext";
+import {
+  useQuizStatusActionContext,
+  useQuizStatusContext,
+} from "../services/state/QuizStatusContext";
 import { cn } from "../ts/util";
 import Button from "./ui/button";
 import Card from "./ui/card";
 
 const Quiz = () => {
-  const { state, globalStateAction } = useGlobalContext();
   const {
     isQuizStart,
     isOptionsClicked,
     isOptionClicked,
     isDisabled,
     isCorrect,
-    quiz,
-    currentQuestion,
-    numberOfQuestions,
-  } = state;
+  } = useQuizStatusContext();
+  const { quiz, currentQuestion, numberOfQuestions } = useQuizContext();
+
   const {
-    incrementCurrentQuestion,
-    incrementQuizScore,
     toggleIsQuizEnd,
     toggleIsDisabled,
     toggleIsOptionClicked,
     changeIsCorrect,
     changeIsOptionsClicked,
     resetIsOptionsClicked,
-  } = globalStateAction;
+  } = useQuizStatusActionContext();
+
+  const { incrementCurrentQuestion, incrementQuizScore } =
+    useQuizActionContext();
 
   return (
     <Card className={cn({ hidden: !isQuizStart })}>

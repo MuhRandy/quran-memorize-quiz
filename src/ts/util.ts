@@ -8,13 +8,9 @@ const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 async function getDataApi(getDataHandler: (data: []) => void, url: string) {
   try {
     const response = await fetch(url);
-    try {
-      const { data } = await response.json();
+    const { data } = await response.json();
 
-      getDataHandler(data);
-    } catch (error) {
-      console.log(error);
-    }
+    getDataHandler(data);
   } catch (error) {
     console.log(error);
   }
@@ -26,12 +22,12 @@ const countScoreResult = (quizScore: number, numberOfQuestions: number) => {
   return Math.round(result);
 };
 
-async function getQuiz(
+function getQuiz(
   amount: number,
   select: number[],
   getDataHandler: (data: QuizProps) => void
 ) {
-  const quiz = await guessVerse.bySurah({
+  const quiz = guessVerse.bySurah({
     amount,
     select,
   });

@@ -1,14 +1,22 @@
-import { useGlobalContext } from "../ts/context";
+import {
+  useQuizActionContext,
+  useQuizContext,
+} from "../services/state/QuizContext";
+import {
+  useQuizStatusActionContext,
+  useQuizStatusContext,
+} from "../services/state/QuizStatusContext";
 import { cn } from "../ts/util";
 import Button from "./ui/button";
 import Card from "./ui/card";
 import Overlay from "./ui/overlay";
 
 const NumberOfQuestionsDialog = () => {
-  const { state, globalStateAction } = useGlobalContext();
-  const { isShowNumberOfQuestions, numberOfQuestions } = state;
-  const { changeNumberOfQuestions, toggleIsShowNumberOfQuestions } =
-    globalStateAction;
+  const { numberOfQuestions } = useQuizContext();
+  const { isShowNumberOfQuestions } = useQuizStatusContext();
+
+  const { changeNumberOfQuestions } = useQuizActionContext();
+  const { toggleIsShowNumberOfQuestions } = useQuizStatusActionContext();
 
   return (
     <Overlay isShow={isShowNumberOfQuestions} className={cn("min-h-full")}>
